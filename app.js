@@ -364,7 +364,7 @@ function renderOperatorDetail(){
         <div class="detail-item"><div class="detail-label">SMS</div><div class="detail-value">${t.sms}</div></div>
         <div class="detail-item"><div class="detail-label">Závazek</div><div class="detail-value">${t.zavazek==='ano'?'Ano':'Ne'}</div></div>
       </div>
-      ${t.poznamka ? `<div class="result-notes">💡 ${t.poznamka}</div>` : ''}
+      ${t.variantDesc? `<div class="result-notes">ℹ️ ${t.variantDesc}</div>`: ``} + `${t.poznamka ? `<div class="result-notes">💡 ${t.poznamka}</div>` : ''}
       <div class="result-rating"><span class="stars">${generateStars(t.hodnoceni)}</span><span>(${t.hodnoceni}/10)</span></div>
     `;
     list.appendChild(card);
