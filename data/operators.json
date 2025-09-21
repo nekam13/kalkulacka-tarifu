@@ -1,0 +1,136 @@
+{
+  "T-Mobile": {
+    "name": "T-Mobile",
+    "type": "hlavní",
+    "network": "T-Mobile",
+    "color": "tmobile",
+    "desc": "Hlavní operátor s vlastní sítí a velmi dobrým pokrytím 4G/5G.",
+    "links": {
+      "cenik": "https://www.t-mobile.cz/cenik",
+      "pokryti": "https://www.t-mobile.cz/pokryti",
+      "eshop": "https://www.t-mobile.cz/"
+    },
+    "pros": [
+      "Široké pokrytí",
+      "Studentské tarify NextU",
+      "Stabilní síť"
+    ],
+    "cons": [
+      "Vyšší cena u neomezených",
+      "Závazky u tarifů"
+    ]
+  },
+  "O2": {
+    "name": "O2",
+    "type": "hlavní",
+    "network": "O2",
+    "color": "o2",
+    "desc": "Hlavní operátor s vlastní sítí a silným 4G, rostoucí 5G.",
+    "links": {
+      "cenik": "https://www.o2.cz/osobni/podpora/ceniky-a-dokumenty",
+      "pokryti": "https://www.o2.cz/osobni/techzona/pokryti-a-technologie",
+      "eshop": "https://www.o2.cz/"
+    },
+    "pros": [
+      "YOU tarify pro mladé",
+      "Široká nabídka služeb"
+    ],
+    "cons": [
+      "Vyšší ceny mimo akce"
+    ]
+  },
+  "Vodafone": {
+    "name": "Vodafone",
+    "type": "hlavní",
+    "network": "Vodafone",
+    "color": "vodafone",
+    "desc": "Hlavní operátor, silné 5G pokrytí a výhodné studentské tarify.",
+    "links": {
+      "cenik": "https://www.vodafone.cz/pece/ceniky/",
+      "pokryti": "https://www.vodafone.cz/mapa-pokryti/",
+      "eshop": "https://www.vodafone.cz/"
+    },
+    "pros": [
+      "#jetovtobě studentské neomezené",
+      "Skvělé 5G pokrytí"
+    ],
+    "cons": [
+      "Omezení rychlosti u levnějších neomezenek"
+    ]
+  },
+  "BLESKmobil": {
+    "name": "BLESKmobil",
+    "type": "virtuální",
+    "network": "O2",
+    "color": "blesk",
+    "desc": "Virtuální operátor v síti O2 s výhodnými předplacenými balíčky.",
+    "links": {
+      "cenik": "https://bleskmobil.cz/balicky/",
+      "pokryti": "https://www.o2.cz/osobni/techzona/pokryti-a-technologie",
+      "eshop": "https://bleskmobil.cz/"
+    },
+    "pros": [
+      "Výhodné akce jako ULTRA30",
+      "Žádné závazky"
+    ],
+    "cons": [
+      "Volání/SMS z kreditu u některých balíčků"
+    ]
+  },
+  "Kaktus": {
+    "name": "Kaktus",
+    "type": "virtuální",
+    "network": "T-Mobile",
+    "color": "tmobile",
+    "desc": "Virtuální operátor T‑Mobilu, flexibilní předplacené tarify.",
+    "links": {
+      "cenik": "https://www.mujkaktus.cz/nabidka",
+      "pokryti": "https://www.t-mobile.cz/pokryti",
+      "eshop": "https://www.mujkaktus.cz/"
+    },
+    "pros": [
+      "Dobré ceny dat",
+      "Flexibilita předplacenky"
+    ],
+    "cons": [
+      "Minuty a SMS se často platí z kreditu"
+    ]
+  },
+  "ČEZ Mobil": {
+    "name": "ČEZ Mobil",
+    "type": "virtuální",
+    "network": "O2",
+    "color": "o2",
+    "desc": "Virtuální operátor skupiny ČEZ v síti O2.",
+    "links": {
+      "cenik": "https://www.cez.cz/cs/mobil/tarify",
+      "pokryti": "https://www.o2.cz/osobni/techzona/pokryti-a-technologie",
+      "eshop": "https://www.cez.cz/cs/mobil"
+    },
+    "pros": [
+      "Jednoduché tarify",
+      "Balíčky s energiemi"
+    ],
+    "cons": [
+      "Delší závazky u některých tarifů"
+    ]
+  },
+  "Emtéčko": {
+    "name": "Emtéčko",
+    "type": "virtuální",
+    "network": "O2",
+    "color": "o2",
+    "desc": "Moravský virtuál v síti O2 s balíčky pro nenáročné.",
+    "links": {
+      "cenik": "https://www.emtecko.cz/",
+      "pokryti": "https://www.o2.cz/osobni/techzona/pokryti-a-technologie",
+      "eshop": "https://www.emtecko.cz/"
+    },
+    "pros": [
+      "Nízké ceny u malých balíčků"
+    ],
+    "cons": [
+      "Limitovaná nabídka"
+    ]
+  }
+}
