@@ -418,15 +418,20 @@ function renderOperatorDetail() {
 }
 
 
+
 function computeValidity(t){
   if (t.validita) return t.validita;
-  const name = String(t.tarif||'').toLowerCase();
-  if (name.includes('den')) return '24 hodin';
-  if (name.includes('týden')) return '7 dní';
-  if (name.includes('víkend')) return 'víkend';
-  if (name.includes('měsíc')) return '30 dní';
+  const n = String(t.tarif||'').toLowerCase();
+  const type = String(t.typ||'').toLowerCase();
+  // explicit keywords
+  if (/(den|day)/.test(n)) return '24 hodin';
+  if (/(týden|tyden|week)/.test(n)) return '7 dní';
+  if (/víkend|vikend/.test(n)) return 'víkend';
+  if (/měsíc|mesic|month/.test(n)) return '30 dní';
+  // type based fallback
+  if (type.includes('předplacen')) return '30 dní';
   if (t.zavazek === 'ano') return 'měsíčně (smluvní)';
-  if (String(t.typ||'').toLowerCase().includes('předplacen')) return '30 dní';
-  if (['BLESKmobil','Kaktus'].includes(t.operator)) return '30 dní';
+  // operator defaults
+  if (['bleskmobil','kaktus'].includes(String(t.operator||'').toLowerCase())) return '30 dní';
   return 'měsíčně';
 }
