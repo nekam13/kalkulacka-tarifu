@@ -303,3 +303,76 @@ function displayComparisonTable(tariffs) {
         tbody.appendChild(row);
     });
 }
+
+
+// =================== Operator detail logic ===================
+function getQueryParam(name){
+  const url = new URL(window.location.href);
+  return url.searchParams.get(name);
+}
+
+const operatorsMeta = {
+  'T-Mobile': {desc: 'Hlavní operátor s vlastní sítí, silné pokrytí 4G a rychlé 5G.', color: 'tmobile'},
+  'O2': {desc: 'Hlavní operátor s vlastní sítí, silné pokrytí 4G a stabilní 5G.', color: 'o2'},
+  'Vodafone': {desc: 'Hlavní operátor, špičkové pokrytí 5G a kvalitní služby pro mladé.', color: 'vodafone'},
+  'BLESKmobil': {desc: 'Virtuální operátor v síti O2. Výhodné předplacené balíčky.', color: 'blesk'},
+  'Kaktus': {desc: 'Virtuální operátor v síti T‑Mobile. Flexibilní předplacené tarify.', color: 'tmobile'},
+  'ČEZ Mobil': {desc: 'Virtuální operátor v síti O2.', color: 'o2'},
+  'Emtéčko': {desc: 'Virtuální operátor v síti O2.', color: 'o2'}
+};
+
+function renderOperatorDetail(){
+  const op = getQueryParam('op');
+  if(!op) return;
+  const title = document.getElementById('operatorTitle');
+  const info = document.getElementById('operatorInfo');
+  const list = document.getElementById('operatorTariffs');
+  if(!title || !info || !list) return;
+
+  const meta = operatorsMeta[op] || {desc: 'Informace nejsou k dispozici.', color: ''};
+  title.textContent = op;
+
+  // Info card
+  info.classList.add(`result-card`, meta.color || '');
+  info.innerHTML = `
+    <div class="result-tariff">Přehled operátora</div>
+    <p class="result-notes">${meta.desc}</p>
+    <div class="result-details">
+      <div class="detail-item"><div class="detail-label">Síť</div><div class="detail-value">${['BLESKmobil','ČEZ Mobil','Emtéčko','Kaktus'].includes(op) ? 'Virtuální (hostuje u hlavního operátora)' : 'Vlastní síť'}</div></div>
+      <div class="detail-item"><div class="detail-label">Tarifů v databázi</div><div class="detail-value">${tariffData.filter(t=>t.operator===op).length}</div></div>
+    </div>`;
+
+  // Tariffs list
+  list.innerHTML = '';
+  tariffData.filter(t=>t.operator===op).forEach((t, idx)=>{
+    const card = document.createElement('div');
+    card.className = `result-card ${getOperatorClass(t.operator)}`;
+    const dataDisplay = t.data_gb >= 999 ? 'Neomezená' : `${t.data_gb} GB`;
+    card.innerHTML = `
+      <div class="result-header">
+        <div>
+          <div class="result-operator">${t.operator}</div>
+          <div class="result-tariff">${t.tarif}</div>
+        </div>
+        <div class="result-price">${t.cena_kc} Kč</div>
+      </div>
+      <div class="result-details">
+        <div class="detail-item"><div class="detail-label">Data</div><div class="detail-value">${dataDisplay}</div></div>
+        <div class="detail-item"><div class="detail-label">Volání</div><div class="detail-value">${t.volani}</div></div>
+        <div class="detail-item"><div class="detail-label">SMS</div><div class="detail-value">${t.sms}</div></div>
+        <div class="detail-item"><div class="detail-label">Závazek</div><div class="detail-value">${t.zavazek==='ano'?'Ano':'Ne'}</div></div>
+      </div>
+      ${t.poznamka ? `<div class="result-notes">💡 ${t.poznamka}</div>` : ''}
+      <div class="result-rating"><span class="stars">${generateStars(t.hodnoceni)}</span><span>(${t.hodnoceni}/10)</span></div>
+    `;
+    list.appendChild(card);
+  });
+}
+
+// Auto‑run on operator page
+window.addEventListener('DOMContentLoaded', ()=>{
+  if (document.getElementById('operatorTariffs')) {
+    renderOperatorDetail();
+  }
+});
+// =================== /Operator detail logic ===================
