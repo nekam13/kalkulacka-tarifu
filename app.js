@@ -2,15 +2,17 @@
 
 // Tariff data
 const tariffData = [
-  {"operator": "T-Mobile", "typ": "Předplacený", "tarif": "Balíček 10 GB", "cena_kc": 235, "data_gb": 10, "volani": "4,50 Kč/min", "sms": "1,90 Kč", "zavazek": "ne", "studentsky": "ne", "poznamka": "Současný stav uživatele", "hodnoceni": 7},
-  {"operator": "BLESKmobil", "typ": "Virtuální AKCE", "tarif": "ULTRA30", "cena_kc": 299, "data_gb": 60, "volani": "z kreditu", "sms": "z kreditu", "zavazek": "ne", "studentsky": "ne", "poznamka": "Akce do 30.9.2025, pak 30GB za 599 Kč", "hodnoceni": 9},
-  {"operator": "Vodafone", "typ": "Student", "tarif": "#jetovtobě Basic+", "cena_kc": 487, "data_gb": 999, "volani": "neomezené", "sms": "neomezené", "zavazek": "ano", "studentsky": "ano", "poznamka": "Do 26 let, ISIC, 4 Mb/s", "hodnoceni": 9},
-  {"operator": "T-Mobile", "typ": "Student", "tarif": "NextU 12 GB", "cena_kc": 495, "data_gb": 12, "volani": "neomezené", "sms": "neomezené", "zavazek": "ano", "studentsky": "ano", "poznamka": "Do 26 let", "hodnoceni": 8},
-  {"operator": "O2", "typ": "Student", "tarif": "YOU 10 GB", "cena_kc": 499, "data_gb": 10, "volani": "neomezené", "sms": "neomezené", "zavazek": "ano", "studentsky": "ano", "poznamka": "Do 26 let, Max 5G", "hodnoceni": 8},
-  {"operator": "BLESKmobil", "typ": "Virtuální", "tarif": "STAR", "cena_kc": 499, "data_gb": 12, "volani": "neomezené", "sms": "neomezené", "zavazek": "ne", "studentsky": "ne", "poznamka": "Síť O2", "hodnoceni": 8},
-  {"operator": "Kaktus", "typ": "Virtuální", "tarif": "16 GB", "cena_kc": 350, "data_gb": 16, "volani": "100 min", "sms": "100", "zavazek": "ne", "studentsky": "ne", "poznamka": "Síť T-Mobile", "hodnoceni": 8},
-  {"operator": "O2", "typ": "Neomezený", "tarif": "NEO+ Stříbrný", "cena_kc": 699, "data_gb": 999, "volani": "neomezené", "sms": "neomezené", "zavazek": "ano", "studentsky": "ne", "poznamka": "20 Mb/s rychlost", "hodnoceni": 8},
-  {"operator": "T-Mobile", "typ": "Předplacený", "tarif": "Balíček 15 GB", "cena_kc": 399, "data_gb": 15, "volani": "4,50 Kč/min", "sms": "1,90 Kč", "zavazek": "ne", "studentsky": "ne", "poznamka": "10+5 GB", "hodnoceni": 8},
+  {operator: "T-Mobile", tarif: "Den neomezeně", cena_kc:69, data_gb:999, volani:"z kreditu", sms:"z kreditu", zavazek:"ne", poznamka:"Neomezený denní balíček", hodnoceni:6, variantDesc:"Jednodenní neomezený přístup k datům za nízkou cenu."},
+  {operator: "T-Mobile", tarif: "Týden neomezeně", cena_kc:249, data_gb:999, volani:"z kreditu", sms:"z kreditu", zavazek:"ne", poznamka:"Neomezený týdenní balíček", hodnoceni:7, variantDesc:"Týdenní neomezená data pro krátkodobé potřeby."},
+  {"operator": "T-Mobile", "typ": "Předplacený", "tarif": "Balíček 10 GB", "cena_kc": 235, "data_gb": 10, "volani": "4,50 Kč/min", "sms": "1,90 Kč", "zavazek": "ne", "studentsky": "ne", "poznamka": "Současný stav uživatele", "hodnoceni": 7, variantDesc: "",},
+  {"operator": "BLESKmobil", "typ": "Virtuální AKCE", "tarif": "ULTRA30", "cena_kc": 299, "data_gb": 60, "volani": "z kreditu", "sms": "z kreditu", "zavazek": "ne", "studentsky": "ne", "poznamka": "Akce do 30.9.2025, pak 30GB za 599 Kč", "hodnoceni": 9, variantDesc: "",},
+  {"operator": "Vodafone", "typ": "Student", "tarif": "#jetovtobě Basic+", "cena_kc": 487, "data_gb": 999, "volani": "neomezené", "sms": "neomezené", "zavazek": "ano", "studentsky": "ano", "poznamka": "Do 26 let, ISIC, 4 Mb/s", "hodnoceni": 9, variantDesc: "",},
+  {"operator": "T-Mobile", "typ": "Student", "tarif": "NextU 12 GB", "cena_kc": 495, "data_gb": 12, "volani": "neomezené", "sms": "neomezené", "zavazek": "ano", "studentsky": "ano", "poznamka": "Do 26 let", "hodnoceni": 8, variantDesc: "",},
+  {"operator": "O2", "typ": "Student", "tarif": "YOU 10 GB", "cena_kc": 499, "data_gb": 10, "volani": "neomezené", "sms": "neomezené", "zavazek": "ano", "studentsky": "ano", "poznamka": "Do 26 let, Max 5G", "hodnoceni": 8, variantDesc: "",},
+  {"operator": "BLESKmobil", "typ": "Virtuální", "tarif": "STAR", "cena_kc": 499, "data_gb": 12, "volani": "neomezené", "sms": "neomezené", "zavazek": "ne", "studentsky": "ne", "poznamka": "Síť O2", "hodnoceni": 8, variantDesc: "",},
+  {"operator": "Kaktus", "typ": "Virtuální", "tarif": "16 GB", "cena_kc": 350, "data_gb": 16, "volani": "100 min", "sms": "100", "zavazek": "ne", "studentsky": "ne", "poznamka": "Síť T-Mobile", "hodnoceni": 8, variantDesc: "",},
+  {"operator": "O2", "typ": "Neomezený", "tarif": "NEO+ Stříbrný", "cena_kc": 699, "data_gb": 999, "volani": "neomezené", "sms": "neomezené", "zavazek": "ano", "studentsky": "ne", "poznamka": "20 Mb/s rychlost", "hodnoceni": 8, variantDesc: "",},
+  {"operator": "T-Mobile", "typ": "Předplacený", "tarif": "Balíček 15 GB", "cena_kc": 399, "data_gb": 15, "volani": "4,50 Kč/min", "sms": "1,90 Kč", "zavazek": "ne", "studentsky": "ne", "poznamka": "10+5 GB", "hodnoceni": 8, variantDesc: "",},
   {"operator": "Vodafone", "typ": "Student", "tarif": "#jetovtobě Super+", "cena_kc": 657, "data_gb": 999, "volani": "neomezené", "sms": "neomezené", "zavazek": "ano", "studentsky": "ano", "poznamka": "Do 26 let, ISIC, 20 Mb/s", "hodnoceni": 9}
 ];
 
