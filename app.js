@@ -376,3 +376,86 @@ window.addEventListener('DOMContentLoaded', ()=>{
   }
 });
 // =================== /Operator detail logic ===================
+
+
+
+// ===== Operators profiles loader =====
+let operatorsProfiles = {};
+fetch('data/operators.json')
+  .then(r=>r.ok?r.json():{})
+  .then(data=>{ operatorsProfiles = data || {}; if(document.getElementById('operatorTariffs')) renderOperatorDetail(); })
+  .catch(()=>{});
+
+// Enhance renderOperatorDetail to use profiles + search
+const originalRender = (typeof renderOperatorDetail==='function') ? renderOperatorDetail : null;
+function renderOperatorDetail(){
+  const op = getQueryParam ? getQueryParam('op') : (new URL(window.location.href)).searchParams.get('op');
+  if(!op) return;
+  const title = document.getElementById('operatorTitle');
+  const info = document.getElementById('operatorInfo');
+  const list = document.getElementById('operatorTariffs');
+  if(!title || !info || !list) return;
+
+  const meta = (operatorsProfiles && operatorsProfiles[op]) || {desc:'Informace nejsou k dispozici.', color:'', links:{}};
+  title.textContent = op;
+
+  info.classList.add('result-card', (meta.color||''));
+  const tariffs = tariffData.filter(t=>t.operator===op);
+  info.innerHTML = `
+    <div class="result-tariff">Přehled operátora</div>
+    <p class="result-notes">${meta.desc}</p>
+    <div class="result-details">
+      <div class="detail-item"><div class="detail-label">Typ</div><div class="detail-value">${meta.type||'—'}</div></div>
+      <div class="detail-item"><div class="detail-label">Síť</div><div class="detail-value">${meta.network||'—'}</div></div>
+      <div class="detail-item"><div class="detail-label">Tarifů v databázi</div><div class="detail-value">${tariffs.length}</div></div>
+    </div>
+    ${meta.pros?('<div class="result-notes"><strong>Výhody:</strong> '+meta.pros.join(', ')+'</div>'):''}
+    ${meta.cons?('<div class="result-notes"><strong>Nevýhody:</strong> '+meta.cons.join(', ')+'</div>'):''}
+  `;
+
+  // CTA buttons
+  const cta = document.getElementById('ctaButtons');
+  const links = meta.links || {};
+  if (cta && (links.cenik||links.pokryti||links.eshop)){
+    cta.innerHTML='';
+    if (links.cenik) cta.innerHTML += `<a class="accent" href="${links.cenik}" target="_blank" rel="noopener">📄 Ceník</a>`;
+    if (links.pokryti) cta.innerHTML += `<a class="secondary" href="${links.pokryti}" target="_blank" rel="noopener">🗺️ Pokrytí</a>`;
+    if (links.eshop) cta.innerHTML += `<a href="${links.eshop}" target="_blank" rel="noopener">🛒 E‑shop</a>`;
+    document.getElementById('linksSection').style.display='block';
+  }
+
+  // Tariffs
+  const renderList = (items)=>{
+    list.innerHTML='';
+    items.forEach(t=>{
+      const card=document.createElement('div');
+      card.className=`result-card ${getOperatorClass(t.operator)}`;
+      const dataDisplay = t.data_gb>=999?'Neomezená':`${t.data_gb} GB`;
+      card.innerHTML = `
+        <div class="result-header">
+          <div><div class="result-operator">${t.operator}</div><div class="result-tariff">${t.tarif}</div></div>
+          <div class="result-price">${t.cena_kc} Kč</div>
+        </div>
+        <div class="result-details">
+          <div class="detail-item"><div class="detail-label">Data</div><div class="detail-value">${dataDisplay}</div></div>
+          <div class="detail-item"><div class="detail-label">Volání</div><div class="detail-value">${t.volani}</div></div>
+          <div class="detail-item"><div class="detail-label">SMS</div><div class="detail-value">${t.sms}</div></div>
+          <div class="detail-item"><div class="detail-label">Závazek</div><div class="detail-value">${t.zavazek==='ano'?'Ano':'Ne'}</div></div>
+        </div>
+        ${t.poznamka?`<div class="result-notes">💡 ${t.poznamka}</div>`:''}
+      `;
+      list.appendChild(card);
+    })
+  }
+  renderList(tariffs);
+
+  // Search filter
+  const searchInput = document.getElementById('tariffSearch');
+  if (searchInput){
+    searchInput.addEventListener('input', ()=>{
+      const q = searchInput.value.toLowerCase();
+      const filtered = tariffs.filter(t => `${t.tarif} ${t.cena_kc}`.toLowerCase().includes(q));
+      renderList(filtered);
+    });
+  }
+}
