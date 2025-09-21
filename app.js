@@ -416,3 +416,17 @@ function renderOperatorDetail() {
     }
   }
 }
+
+
+function computeValidity(t){
+  if (t.validita) return t.validita;
+  const name = String(t.tarif||'').toLowerCase();
+  if (name.includes('den')) return '24 hodin';
+  if (name.includes('týden')) return '7 dní';
+  if (name.includes('víkend')) return 'víkend';
+  if (name.includes('měsíc')) return '30 dní';
+  if (t.zavazek === 'ano') return 'měsíčně (smluvní)';
+  if (String(t.typ||'').toLowerCase().includes('předplacen')) return '30 dní';
+  if (['BLESKmobil','Kaktus'].includes(t.operator)) return '30 dní';
+  return 'měsíčně';
+}
