@@ -488,3 +488,120 @@ input[type="checkbox"] {
 .cta-buttons a.secondary{background:#10b981}
 .cta-buttons a.accent{background:#e20074}
 .cta-buttons a:hover{filter:brightness(1.05)}
+
+
+
+/* ========== TAG STYLES ========== */
+.result-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 0.5rem 0;
+}
+
+.tag {
+  display: inline-block;
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--primary-color);
+  padding: 0.15rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.tag:first-child {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success-color);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+/* Tag filters */
+.tag-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: var(--background-color);
+  border-radius: var(--radius-lg);
+}
+
+.tag-filter {
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--surface-color);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.tag-filter:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.tag-filter.active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+/* ========== OPERATOR ARTICLE STYLES ========== */
+.operator-article {
+  margin: 1rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(37, 99, 235, 0.02));
+  border-radius: var(--radius-lg);
+  border-left: 4px solid var(--primary-color);
+}
+
+.operator-article h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.operator-article p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.operator-article p:last-child {
+  margin-bottom: 0;
+}
+
+.operator-article strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Enhanced CTA buttons in tariff cards */
+.result-card .cta-buttons {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.result-card .cta-buttons a {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: white;
+  background: var(--primary-color);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.result-card .cta-buttons a:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
