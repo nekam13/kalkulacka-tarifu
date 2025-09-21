@@ -1,149 +1,87 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulačka mobilních tarifů pro ČR</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulačka mobilních tarifů pro ČR</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <h1>📱 Kalkulačka mobilních tarifů pro ČR</h1>
-            <p class="header__description">Najděte nejlepší mobilní tarif podle vašich potřeb. Porovnejte všechny operátory a ušetřete peníze!</p>
-        </header>
+  <div class="container">
+    <header class="header">
+      <h1>📱 Kalkulačka mobilních tarifů pro ČR</h1>
+      <p class="header__description">Najděte nejlepší mobilní tarif podle vašich potřeb. Porovnejte všechny operátory a ušetřete peníze!</p>
+    </header>
 
-        <!-- Operator logos -->
-        <div class="operators-showcase">
-            <div class="operator-logo tmobile">
-                <span class="logo-text">T-Mobile</span>
-            </div>
-            <div class="operator-logo o2">
-                <span class="logo-text">O2</span>
-            </div>
-            <div class="operator-logo vodafone">
-                <span class="logo-text">Vodafone</span>
-            </div>
-            <div class="operator-logo blesk">
-                <span class="logo-text">BLESKmobil</span>
-            </div>
-        </div>
-
-        <!-- Calculator Form -->
-        <div class="calculator-form card">
-            <h2>🔍 Zadejte vaše požadavky</h2>
-
-            <div class="form-group">
-                <label class="form-label" for="dataSlider">Množství dat měsíčně:</label>
-                <div class="slider-container">
-                    <input type="range" id="dataSlider" min="1" max="100" value="10" class="data-slider">
-                    <div class="slider-value">
-                        <span id="dataValue">10</span> GB
-                    </div>
-                </div>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="unlimitedData">
-                    <label for="unlimitedData">Neomezená data</label>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Speciální požadavky:</label>
-                <div class="checkboxes-grid">
-                    <div class="checkbox-container">
-                        <input type="checkbox" id="isStudent">
-                        <label for="isStudent">🎓 Jsem student (ISIC)</label>
-                    </div>
-                    <div class="checkbox-container">
-                        <input type="checkbox" id="noContract">
-                        <label for="noContract">🚫 Chci bez závazku</label>
-                    </div>
-                    <div class="checkbox-container">
-                        <input type="checkbox" id="unlimitedCalls">
-                        <label for="unlimitedCalls">📞 Neomezené volání</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label" for="operatorSelect">Preferovaný operátor:</label>
-                <select id="operatorSelect" class="operator-select">
-                    <option value="all">Všichni operátoři</option>
-                    <option value="T-Mobile">T-Mobile</option>
-                    <option value="O2">O2</option>
-                    <option value="Vodafone">Vodafone</option>
-                    <option value="virtual">Virtuální operátoři</option>
-                </select>
-            </div>
-
-            <button class="search-button" onclick="findBestTariffs()">
-                🔍 Najít nejlepší tarify
-            </button>
-        </div>
-
-        <!-- Results Section -->
-        <div id="resultsSection" class="results-section" style="display: none;">
-            <h2>🏆 TOP 5 doporučených tarifů</h2>
-            <div id="resultsContainer" class="results-container">
-                <!-- Results will be populated by JavaScript -->
-            </div>
-        </div>
-
-        <!-- Comparison Table -->
-        <div id="comparisonSection" class="comparison-section" style="display: none;">
-            <h2>📊 Porovnávací tabulka</h2>
-            <div class="table-container">
-                <table id="comparisonTable" class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Operátor</th>
-                            <th>Tarif</th>
-                            <th>Cena</th>
-                            <th>Data</th>
-                            <th>Volání</th>
-                            <th>SMS</th>
-                            <th>Závazek</th>
-                            <th>Hodnocení</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Table rows will be populated by JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Tips Section -->
-        <div class="tips-section card">
-            <h2>💡 Tipy pro výběr tarifu</h2>
-            <div class="tips-grid">
-                <div class="tip-card">
-                    <h3>🎓 Pro studenty</h3>
-                    <p>Využijte ISIC kartu pro slevy až 35% u Vodafone nebo speciální studentské tarify u T-Mobile a O2.</p>
-                </div>
-                <div class="tip-card">
-                    <h3>💰 Ušetřit peníze</h3>
-                    <p>Virtuální operátoři často nabízí lepší poměr cena/výkon. Zkuste BLESKmobil nebo Kaktus.</p>
-                </div>
-                <div class="tip-card">
-                    <h3>📶 Pokrytí</h3>
-                    <p>Všichni tři hlavní operátoři mají podobné 4G pokrytí (99%+). U 5G vede Vodafone.</p>
-                </div>
-                <div class="tip-card">
-                    <h3>🚫 Bez závazku</h3>
-                    <p>Předplacené karty vám dávají flexibilitu, ale často jsou dražší než smlouvy.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <p>📅 Data aktualizována k září 2025 | Vytvořeno pro studenty</p>
-            <p>💡 Tip: Před změnou operátora si ověřte aktuální nabídky na oficiálních stránkách</p>
-        </footer>
+    <!-- Clickable operator cards -->
+    <div class="operators-showcase">
+      <a class="operator-logo tmobile" href="operator.html?op=T-Mobile" title="Zobrazit tarify T-Mobile"><span class="logo-text">T-Mobile</span></a>
+      <a class="operator-logo o2" href="operator.html?op=O2" title="Zobrazit tarify O2"><span class="logo-text">O2</span></a>
+      <a class="operator-logo vodafone" href="operator.html?op=Vodafone" title="Zobrazit tarify Vodafone"><span class="logo-text">Vodafone</span></a>
+      <a class="operator-logo blesk" href="operator.html?op=BLESKmobil" title="Zobrazit tarify BLESKmobil"><span class="logo-text">BLESKmobil</span></a>
     </div>
 
-    <script src="app.js"></script>
+    <div class="calculator-form card">
+      <h2>🔍 Zadejte vaše požadavky</h2>
+      <div class="form-group">
+        <label class="form-label" for="dataSlider">Množství dat měsíčně:</label>
+        <div class="slider-container">
+          <input type="range" id="dataSlider" min="1" max="100" value="10" class="data-slider">
+          <div class="slider-value"><span id="dataValue">10</span> GB</div>
+        </div>
+        <div class="checkbox-container"><input type="checkbox" id="unlimitedData"><label for="unlimitedData">Neomezená data</label></div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Speciální požadavky:</label>
+        <div class="checkboxes-grid">
+          <div class="checkbox-container"><input type="checkbox" id="isStudent"><label for="isStudent">🎓 Jsem student (ISIC)</label></div>
+          <div class="checkbox-container"><input type="checkbox" id="noContract"><label for="noContract">🚫 Chci bez závazku</label></div>
+          <div class="checkbox-container"><input type="checkbox" id="unlimitedCalls"><label for="unlimitedCalls">📞 Neomezené volání</label></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="operatorSelect">Preferovaný operátor:</label>
+        <select id="operatorSelect" class="operator-select">
+          <option value="all">Všichni operátoři</option>
+          <option value="T-Mobile">T-Mobile</option>
+          <option value="O2">O2</option>
+          <option value="Vodafone">Vodafone</option>
+          <option value="virtual">Virtuální operátoři</option>
+        </select>
+      </div>
+
+      <button class="search-button" onclick="findBestTariffs()">🔍 Najít nejlepší tarify</button>
+    </div>
+
+    <div id="resultsSection" class="results-section" style="display:none;">
+      <h2>🏆 TOP 5 doporučených tarifů</h2>
+      <div id="resultsContainer" class="results-container"></div>
+    </div>
+
+    <div id="comparisonSection" class="comparison-section" style="display:none;">
+      <h2>📊 Porovnávací tabulka</h2>
+      <div class="table-container">
+        <table id="comparisonTable" class="comparison-table">
+          <thead><tr><th>Operátor</th><th>Tarif</th><th>Cena</th><th>Data</th><th>Volání</th><th>SMS</th><th>Závazek</th><th>Hodnocení</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tips-section card">
+      <h2>💡 Tipy pro výběr tarifu</h2>
+      <div class="tips-grid">
+        <div class="tip-card"><h3>🎓 Pro studenty</h3><p>Využijte ISIC kartu pro slevy až 35% u Vodafone nebo speciální studentské tarify u T‑Mobile a O2.</p></div>
+        <div class="tip-card"><h3>💰 Ušetřit peníze</h3><p>Virtuální operátoři často nabízí lepší poměr cena/výkon. Zkuste BLESKmobil nebo Kaktus.</p></div>
+        <div class="tip-card"><h3>📶 Pokrytí</h3><p>Všichni tři hlavní operátoři mají podobné 4G pokrytí (99%+). U 5G vede Vodafone.</p></div>
+        <div class="tip-card"><h3>🚫 Bez závazku</h3><p>Předplacené karty dávají flexibilitu, ale často jsou dražší než smlouvy.</p></div>
+      </div>
+    </div>
+
+    <footer class="footer"><p>📅 Data aktualizována k září 2025 | Vytvořeno pro studenty</p><p>💡 Tip: Před změnou operátora ověřte aktuální nabídky na oficiálních stránkách</p></footer>
+  </div>
+  <script src="app.js"></script>
 </body>
 </html>
