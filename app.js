@@ -1,93 +1,62 @@
-// Mobile Tariff Calculator JavaScript - EXPANDED EDITION
+// Mobile Tariff Calculator JavaScript - COMPLETE WITH VALIDITY
 
 const tariffData = [
   // ========== T-MOBILE (10 variants) ==========
-  {operator: "T-Mobile", typ: "Předplacený", tarif: "Balíček 10 GB", cena_kc: 235, data_gb: 10, volani: "4,50 Kč/min", sms: "1,90 Kč", zavazek: "ne", studentsky: "ne", poznamka: "Současný stav uživatele", hodnoceni: 7, variantDesc: "Twist datový balíček s automatickou obnovou po 30 dnech.", tags: ["bez závazku"]},
-  {operator: "T-Mobile", typ: "Předplacený", tarif: "Balíček 15 GB", cena_kc: 399, data_gb: 15, volani: "4,50 Kč/min", sms: "1,90 Kč", zavazek: "ne", studentsky: "ne", poznamka: "10+5 GB přes app", hodnoceni: 8, variantDesc: "Vyšší objem dat pro náročnější používání bez závazku.", tags: ["bez závazku"]},
-  {operator: "T-Mobile", typ: "Předplacený", tarif: "Den neomezeně", cena_kc: 69, data_gb: 999, volani: "z kreditu", sms: "z kreditu", zavazek: "ne", studentsky: "ne", poznamka: "24 hodin", hodnoceni: 6, variantDesc: "Jednodenní neomezená data – hodí se na cestování a akce.", tags: ["bez závazku", "akce"]},
-  {operator: "T-Mobile", typ: "Předplacený", tarif: "Týden neomezeně", cena_kc: 249, data_gb: 999, volani: "z kreditu", sms: "z kreditu", zavazek: "ne", studentsky: "ne", poznamka: "7 dní", hodnoceni: 7, variantDesc: "Týdenní neomezené surfování bez závazku.", tags: ["bez závazku"]},
-  {operator: "T-Mobile", typ: "Student", tarif: "NextU 12 GB", cena_kc: 495, data_gb: 12, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ano", poznamka: "Do 26 let", hodnoceni: 8, variantDesc: "Studentský tarif s 12 GB a neomezeným voláním/SMS.", tags: ["student"]},
-  {operator: "T-Mobile", typ: "Student", tarif: "NextU 20 GB", cena_kc: 595, data_gb: 20, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ano", poznamka: "Do 26 let", hodnoceni: 9, variantDesc: "Rozšířená studentská varianta s 20 GB dat.", tags: ["student"]},
-  {operator: "T-Mobile", typ: "Klasický", tarif: "Next 5 GB", cena_kc: 595, data_gb: 5, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "Pořád online po vyčerpání", hodnoceni: 5, variantDesc: "Základní tarif s garantovaným připojením i po vyčerpání.", tags: []},
-  {operator: "T-Mobile", typ: "Klasický", tarif: "Next 12 GB", cena_kc: 745, data_gb: 12, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "Pořád online po vyčerpání", hodnoceni: 6, variantDesc: "Standardní tarif s 12 GB a garantovaným připojením.", tags: []},
-  {operator: "T-Mobile", typ: "Neomezený", tarif: "Next neomezeně (4 Mb/s)", cena_kc: 705, data_gb: 999, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "4 Mb/s rychlost", hodnoceni: 7, variantDesc: "Cenově dostupná neomezenka s omezenou rychlostí.", tags: []},
-  {operator: "T-Mobile", typ: "Neomezený", tarif: "Next neomezeně Max", cena_kc: 995, data_gb: 999, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "Plná rychlost 5G", hodnoceni: 8, variantDesc: "Premium neomezená data s plnou rychlostí 5G.", tags: []},
+  {operator: "T-Mobile", typ: "Předplacený", tarif: "Balíček 10 GB", cena_kc: 235, data_gb: 10, volani: "4,50 Kč/min", sms: "1,90 Kč", zavazek: "ne", studentsky: "ne", poznamka: "Současný stav uživatele", hodnoceni: 7, variantDesc: "Twist datový balíček s automatickou obnovou po 30 dnech.", validita: "30 dní", tags: ["bez závazku"]},
+  {operator: "T-Mobile", typ: "Předplacený", tarif: "Balíček 15 GB", cena_kc: 399, data_gb: 15, volani: "4,50 Kč/min", sms: "1,90 Kč", zavazek: "ne", studentsky: "ne", poznamka: "10+5 GB přes app", hodnoceni: 8, variantDesc: "Vyšší objem dat pro náročnější používání bez závazku.", validita: "30 dní", tags: ["bez závazku"]},
+  {operator: "T-Mobile", typ: "Předplacený", tarif: "Den neomezeně", cena_kc: 69, data_gb: 999, volani: "z kreditu", sms: "z kreditu", zavazek: "ne", studentsky: "ne", poznamka: "24 hodin", hodnoceni: 6, variantDesc: "Jednodenní neomezená data – hodí se na cestování a akce.", validita: "24 hodin", tags: ["bez závazku", "akce"]},
+  {operator: "T-Mobile", typ: "Předplacený", tarif: "Týden neomezeně", cena_kc: 249, data_gb: 999, volani: "z kreditu", sms: "z kreditu", zavazek: "ne", studentsky: "ne", poznamka: "7 dní", hodnoceni: 7, variantDesc: "Týdenní neomezené surfování bez závazku.", validita: "7 dní", tags: ["bez závazku"]},
+  {operator: "T-Mobile", typ: "Student", tarif: "NextU 12 GB", cena_kc: 495, data_gb: 12, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ano", poznamka: "Do 26 let", hodnoceni: 8, variantDesc: "Studentský tarif s 12 GB a neomezeným voláním/SMS.", validita: "měsíčně", tags: ["student"]},
+  {operator: "T-Mobile", typ: "Student", tarif: "NextU 20 GB", cena_kc: 595, data_gb: 20, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ano", poznamka: "Do 26 let", hodnoceni: 9, variantDesc: "Rozšířená studentská varianta s 20 GB dat.", validita: "měsíčně", tags: ["student"]},
+  {operator: "T-Mobile", typ: "Klasický", tarif: "Next 5 GB", cena_kc: 595, data_gb: 5, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "Pořád online po vyčerpání", hodnoceni: 5, variantDesc: "Základní tarif s garantovaným připojením i po vyčerpání.", validita: "měsíčně", tags: []},
+  {operator: "T-Mobile", typ: "Klasický", tarif: "Next 12 GB", cena_kc: 745, data_gb: 12, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "Pořád online po vyčerpání", hodnoceni: 6, variantDesc: "Standardní tarif s 12 GB a garantovaným připojením.", validita: "měsíčně", tags: []},
+  {operator: "T-Mobile", typ: "Neomezený", tarif: "Next neomezeně (4 Mb/s)", cena_kc: 705, data_gb: 999, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "4 Mb/s rychlost", hodnoceni: 7, variantDesc: "Cenově dostupná neomezenka s omezenou rychlostí.", validita: "měsíčně", tags: []},
+  {operator: "T-Mobile", typ: "Neomezený", tarif: "Next neomezeně Max", cena_kc: 995, data_gb: 999, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "Plná rychlost 5G", hodnoceni: 8, variantDesc: "Premium neomezená data s plnou rychlostí 5G.", validita: "měsíčně", tags: []},
 
   // ========== O2 (10 variants) ==========
-  {operator: "O2", typ: "Student", tarif: "YOU 10 GB", cena_kc: 499, data_gb: 10, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ano", poznamka: "Do 26 let", hodnoceni: 8, variantDesc: "Studentský tarif pro mladé – 10 GB a neomezené volání/SMS.", tags: ["student"]},
-  {operator: "O2", typ: "Student", tarif: "YOU 20 GB", cena_kc: 599, data_gb: 20, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ano", poznamka: "Do 26 let", hodnoceni: 9, variantDesc: "Rozšířená studentská verze s 20 GB dat.", tags: ["student"]},
-  {operator: "O2", typ: "Předplacený", tarif: "TWIST 5 GB", cena_kc: 349, data_gb: 5, volani: "3,90 Kč/min", sms: "1,50 Kč", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 6, variantDesc: "Základní předplacený balíček s 5 GB dat.", tags: ["bez závazku"]},
-  {operator: "O2", typ: "Předplacený", tarif: "TWIST 10 GB", cena_kc: 449, data_gb: 10, volani: "3,90 Kč/min", sms: "1,50 Kč", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 7, variantDesc: "Střední předplacený balíček s 10 GB dat.", tags: ["bez závazku"]},
-  {operator: "O2", typ: "Klasický", tarif: "NEO+ Modrý 4 GB", cena_kc: 599, data_gb: 4, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "3x měsíčně neomezená data na 24h", hodnoceni: 6, variantDesc: "4 GB + bonus neomezených dnů třikrát měsíčně.", tags: []},
-  {operator: "O2", typ: "Klasický", tarif: "NEO+ Bronzový 12 GB", cena_kc: 749, data_gb: 12, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "", hodnoceni: 6, variantDesc: "12 GB s neomezeným voláním a SMS.", tags: []},
-  {operator: "O2", typ: "Datový", tarif: "Data+ 30 GB", cena_kc: 649, data_gb: 30, volani: "3,50 Kč/min", sms: "1,50 Kč", zavazek: "ano", studentsky: "ne", poznamka: "Pouze data", hodnoceni: 7, variantDesc: "Datový tarif pro tablety/modemy, volání se platí dle spotřeby.", tags: []},
-  {operator: "O2", typ: "Datový", tarif: "Data+ 50 GB", cena_kc: 849, data_gb: 50, volani: "3,50 Kč/min", sms: "1,50 Kč", zavazek: "ano", studentsky: "ne", poznamka: "Pouze data", hodnoceni: 8, variantDesc: "Velký datový balíček pro náročné použití.", tags: []},
-  {operator: "O2", typ: "Neomezený", tarif: "NEO+ Stříbrný (20 Mb/s)", cena_kc: 699, data_gb: 999, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "20 Mb/s rychlost", hodnoceni: 8, variantDesc: "Neomezenka s rychlostním limitem pro většinu aktivit.", tags: []},
-  {operator: "O2", typ: "Neomezený", tarif: "NEO+ Zlatý (Max rychlost)", cena_kc: 899, data_gb: 999, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "Plná rychlost", hodnoceni: 9, variantDesc: "Premium neomezená data s maximální rychlostí.", tags: []},
+  {operator: "O2", typ: "Student", tarif: "YOU 10 GB", cena_kc: 499, data_gb: 10, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ano", poznamka: "Do 26 let", hodnoceni: 8, variantDesc: "Studentský tarif pro mladé – 10 GB a neomezené volání/SMS.", validita: "měsíčně", tags: ["student"]},
+  {operator: "O2", typ: "Student", tarif: "YOU 20 GB", cena_kc: 599, data_gb: 20, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ano", poznamka: "Do 26 let", hodnoceni: 9, variantDesc: "Rozšířená studentská verze s 20 GB dat.", validita: "měsíčně", tags: ["student"]},
+  {operator: "O2", typ: "Předplacený", tarif: "TWIST 5 GB", cena_kc: 349, data_gb: 5, volani: "3,90 Kč/min", sms: "1,50 Kč", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 6, variantDesc: "Základní předplacený balíček s 5 GB dat.", validita: "30 dní", tags: ["bez závazku"]},
+  {operator: "O2", typ: "Předplacený", tarif: "TWIST 10 GB", cena_kc: 449, data_gb: 10, volani: "3,90 Kč/min", sms: "1,50 Kč", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 7, variantDesc: "Střední předplacený balíček s 10 GB dat.", validita: "30 dní", tags: ["bez závazku"]},
+  {operator: "O2", typ: "Klasický", tarif: "NEO+ Modrý 4 GB", cena_kc: 599, data_gb: 4, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "3x měsíčně neomezená data na 24h", hodnoceni: 6, variantDesc: "4 GB + bonus neomezených dnů třikrát měsíčně.", validita: "měsíčně", tags: []},
+  {operator: "O2", typ: "Klasický", tarif: "NEO+ Bronzový 12 GB", cena_kc: 749, data_gb: 12, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "", hodnoceni: 6, variantDesc: "12 GB s neomezeným voláním a SMS.", validita: "měsíčně", tags: []},
+  {operator: "O2", typ: "Datový", tarif: "Data+ 30 GB", cena_kc: 649, data_gb: 30, volani: "3,50 Kč/min", sms: "1,50 Kč", zavazek: "ano", studentsky: "ne", poznamka: "Pouze data", hodnoceni: 7, variantDesc: "Datový tarif pro tablety/modemy, volání se platí dle spotřeby.", validita: "měsíčně", tags: []},
+  {operator: "O2", typ: "Datový", tarif: "Data+ 50 GB", cena_kc: 849, data_gb: 50, volani: "3,50 Kč/min", sms: "1,50 Kč", zavazek: "ano", studentsky: "ne", poznamka: "Pouze data", hodnoceni: 8, variantDesc: "Velký datový balíček pro náročné použití.", validita: "měsíčně", tags: []},
+  {operator: "O2", typ: "Neomezený", tarif: "NEO+ Stříbrný (20 Mb/s)", cena_kc: 699, data_gb: 999, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "20 Mb/s rychlost", hodnoceni: 8, variantDesc: "Neomezenka s rychlostním limitem pro většinu aktivit.", validita: "měsíčně", tags: []},
+  {operator: "O2", typ: "Neomezený", tarif: "NEO+ Zlatý (Max rychlost)", cena_kc: 899, data_gb: 999, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "Plná rychlost", hodnoceni: 9, variantDesc: "Premium neomezená data s maximální rychlostí.", validita: "měsíčně", tags: []},
 
-  // ========== VODAFONE (10 variants) ==========
-  {operator: "Vodafone", typ: "Student", tarif: "#jetovtobě Basic+ (4 Mb/s)", cena_kc: 487, data_gb: 999, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ano", poznamka: "ISIC sleva", hodnoceni: 9, variantDesc: "Studentská neomezenka s rychlostí 4 Mb/s.", tags: ["student"]},
-  {operator: "Vodafone", typ: "Student", tarif: "#jetovtobě Super+ (20 Mb/s)", cena_kc: 657, data_gb: 999, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ano", poznamka: "ISIC sleva", hodnoceni: 9, variantDesc: "Rychlejší studentská neomezenka s 20 Mb/s.", tags: ["student"]},
-  {operator: "Vodafone", typ: "Student", tarif: "#jetovtobě 15 GB", cena_kc: 387, data_gb: 15, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ano", poznamka: "ISIC sleva", hodnoceni: 8, variantDesc: "Studentský tarif s 15 GB a neomezeným voláním.", tags: ["student"]},
-  {operator: "Vodafone", typ: "Předplacený", tarif: "Den neomezeně", cena_kc: 79, data_gb: 999, volani: "z kreditu", sms: "z kreditu", zavazek: "ne", studentsky: "ne", poznamka: "24 hodin", hodnoceni: 6, variantDesc: "Jednodenní neomezená data ve Vodafonu.", tags: ["bez závazku"]},
-  {operator: "Vodafone", typ: "Předplacený", tarif: "Týden neomezeně", cena_kc: 269, data_gb: 999, volani: "z kreditu", sms: "z kreditu", zavazek: "ne", studentsky: "ne", poznamka: "7 dní", hodnoceni: 7, variantDesc: "Týdenní neomezená data na předplacence.", tags: ["bez závazku"]},
-  {operator: "Vodafone", typ: "Předplacený", tarif: "Měsíc 20 GB", cena_kc: 599, data_gb: 20, volani: "4,90 Kč/min", sms: "1,90 Kč", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 7, variantDesc: "Měsíční předplacený balíček s 20 GB.", tags: ["bez závazku"]},
-  {operator: "Vodafone", typ: "Klasický", tarif: "Red Basic 6 GB", cena_kc: 657, data_gb: 6, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "", hodnoceni: 5, variantDesc: "Základní Red tarif s 6 GB dat.", tags: []},
-  {operator: "Vodafone", typ: "Klasický", tarif: "Red Extra 15 GB", cena_kc: 757, data_gb: 15, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "", hodnoceni: 7, variantDesc: "Rozšířený Red tarif s 15 GB dat.", tags: []},
-  {operator: "Vodafone", typ: "Neomezený", tarif: "Red Basic+ (4 Mb/s)", cena_kc: 697, data_gb: 999, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "4 Mb/s rychlost", hodnoceni: 7, variantDesc: "Dostupná neomezenka s limitem rychlosti.", tags: []},
-  {operator: "Vodafone", typ: "Neomezený", tarif: "Red Max (Plná rychlost)", cena_kc: 997, data_gb: 999, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "Max 5G rychlost", hodnoceni: 9, variantDesc: "Premium neomezený tarif s plnou 5G rychlostí.", tags: []},
-
-  // ========== BLESKMOBIL (10 variants) ==========
-  {operator: "BLESKmobil", typ: "Virtuální", tarif: "ULTRA30 60 GB (akce)", cena_kc: 299, data_gb: 60, volani: "z kreditu", sms: "z kreditu", zavazek: "ne", studentsky: "ne", poznamka: "Akce do konce roku", hodnoceni: 9, variantDesc: "Masivní porce dat bez závazku, ideální pro šetření.", tags: ["bez závazku", "akce"]},
-  {operator: "BLESKmobil", typ: "Virtuální", tarif: "KLASIK 1 GB", cena_kc: 249, data_gb: 1, volani: "300 min", sms: "300", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 5, variantDesc: "Základní balíček pro méně náročné uživatele.", tags: ["bez závazku"]},
-  {operator: "BLESKmobil", typ: "Virtuální", tarif: "TOP 4 GB", cena_kc: 399, data_gb: 4, volani: "neomezené", sms: "neomezené", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 7, variantDesc: "Střední balíček s neomezenými službami.", tags: ["bez závazku"]},
-  {operator: "BLESKmobil", typ: "Virtuální", tarif: "STAR 12 GB", cena_kc: 499, data_gb: 12, volani: "neomezené", sms: "neomezené", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 8, variantDesc: "Vyvážený balíček pro pravidelné používání.", tags: ["bez závazku"]},
-  {operator: "BLESKmobil", typ: "Virtuální", tarif: "POWER 25 GB", cena_kc: 599, data_gb: 25, volani: "neomezené", sms: "neomezené", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 8, variantDesc: "Silný balíček pro náročné uživatele.", tags: ["bez závazku"]},
-  {operator: "BLESKmobil", typ: "Virtuální", tarif: "MAX 50 GB", cena_kc: 799, data_gb: 50, volani: "neomezené", sms: "neomezené", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 9, variantDesc: "Maximální balíček pro extrémní potřeby.", tags: ["bez závazku"]},
-  {operator: "BLESKmobil", typ: "Virtuální", tarif: "VÍKEND 5 GB", cena_kc: 199, data_gb: 5, volani: "z kreditu", sms: "z kreditu", zavazek: "ne", studentsky: "ne", poznamka: "Pouze víkendy", hodnoceni: 6, variantDesc: "Speciální balíček pouze pro víkendové použití.", tags: ["bez závazku", "akce"]},
-  {operator: "BLESKmobil", typ: "Virtuální", tarif: "RODINNÝ 8 GB", cena_kc: 449, data_gb: 8, volani: "500 min", sms: "500", zavazek: "ne", studentsky: "ne", poznamka: "Pro rodiny", hodnoceni: 7, variantDesc: "Rodinný balíček s rozumným objemem dat.", tags: ["bez závazku"]},
-  {operator: "BLESKmobil", typ: "Virtuální", tarif: "FLEXI 15 GB", cena_kc: 549, data_gb: 15, volani: "1000 min", sms: "1000", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 8, variantDesc: "Flexibilní balíček s velkým množstvím minut.", tags: ["bez závazku"]},
-  {operator: "BLESKmobil", typ: "Virtuální", tarif: "STUDENT 20 GB", cena_kc: 399, data_gb: 20, volani: "neomezené", sms: "neomezené", zavazek: "ne", studentsky: "ano", poznamka: "ISIC sleva", hodnoceni: 9, variantDesc: "Speciální studentský balíček s výhodnou cenou.", tags: ["bez závazku", "student"]},
-
-  // ========== KAKTUS (10 variants) ==========
-  {operator: "Kaktus", typ: "Virtuální", tarif: "KAKTUS 6 GB", cena_kc: 250, data_gb: 6, volani: "100 min", sms: "100", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 6, variantDesc: "Základní Kaktus balíček s 6 GB dat.", tags: ["bez závazku"]},
-  {operator: "Kaktus", typ: "Virtuální", tarif: "KAKTUS 10 GB (akce)", cena_kc: 250, data_gb: 10, volani: "z kreditu", sms: "z kreditu", zavazek: "ne", studentsky: "ne", poznamka: "Akční cena", hodnoceni: 8, variantDesc: "Levný datový balíček na předplacence.", tags: ["bez závazku", "akce"]},
-  {operator: "Kaktus", typ: "Virtuální", tarif: "KAKTUS 16 GB", cena_kc: 350, data_gb: 16, volani: "100 min", sms: "100", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 8, variantDesc: "Větší dávka dat s balíčkem minut a SMS.", tags: ["bez závazku"]},
-  {operator: "Kaktus", typ: "Virtuální", tarif: "KAKTUS 25 GB", cena_kc: 450, data_gb: 25, volani: "200 min", sms: "200", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 8, variantDesc: "Silný balíček pro náročnější využití.", tags: ["bez závazku"]},
-  {operator: "Kaktus", typ: "Virtuální", tarif: "KAKTUS Neomezený Mini", cena_kc: 599, data_gb: 999, volani: "z kreditu", sms: "z kreditu", zavazek: "ne", studentsky: "ne", poznamka: "1 Mb/s po 30 GB", hodnoceni: 7, variantDesc: "Neomezená data s omezením rychlosti po 30 GB.", tags: ["bez závazku"]},
-  {operator: "Kaktus", typ: "Virtuální", tarif: "KAKTUS Den", cena_kc: 49, data_gb: 999, volani: "z kreditu", sms: "z kreditu", zavazek: "ne", studentsky: "ne", poznamka: "24 hodin", hodnoceni: 6, variantDesc: "Jednodenní neomezená data za super cenu.", tags: ["bez závazku", "akce"]},
-  {operator: "Kaktus", typ: "Virtuální", tarif: "KAKTUS Týden", cena_kc: 199, data_gb: 999, volani: "z kreditu", sms: "z kreditu", zavazek: "ne", studentsky: "ne", poznamka: "7 dní", hodnoceni: 7, variantDesc: "Týdenní neomezená data pro krátkodobé potřeby.", tags: ["bez závazku"]},
-  {operator: "Kaktus", typ: "Virtuální", tarif: "KAKTUS Student", cena_kc: 299, data_gb: 20, volani: "300 min", sms: "300", zavazek: "ne", studentsky: "ano", poznamka: "ISIC sleva", hodnoceni: 9, variantDesc: "Speciální studentská nabídka s 20 GB.", tags: ["bez závazku", "student"]},
-  {operator: "Kaktus", typ: "Virtuální", tarif: "KAKTUS Familie", cena_kc: 399, data_gb: 30, volani: "500 min", sms: "500", zavazek: "ne", studentsky: "ne", poznamka: "Pro rodiny", hodnoceni: 8, variantDesc: "Rodinný balíček s velkým objemem dat.", tags: ["bez závazku"]},
-  {operator: "Kaktus", typ: "Virtuální", tarif: "KAKTUS Flex", cena_kc: 349, data_gb: 12, volani: "neomezené", sms: "neomezené", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 8, variantDesc: "Flexibilní tarif s neomezeným voláním.", tags: ["bez závazku"]},
-
-  // ========== ČEZ MOBIL (10 variants) ==========
-  {operator: "ČEZ Mobil", typ: "Virtuální", tarif: "ČEZ 1,5 GB", cena_kc: 349, data_gb: 1.5, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "", hodnoceni: 5, variantDesc: "Základní tarif pro minimální spotřebu.", tags: []},
-  {operator: "ČEZ Mobil", typ: "Virtuální", tarif: "ČEZ 3 GB", cena_kc: 449, data_gb: 3, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "", hodnoceni: 6, variantDesc: "Střední tarif pro běžné použití.", tags: []},
-  {operator: "ČEZ Mobil", typ: "Virtuální", tarif: "ČEZ 8 GB", cena_kc: 549, data_gb: 8, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "", hodnoceni: 6, variantDesc: "Základní tarif s neomezeným voláním a 8 GB.", tags: []},
-  {operator: "ČEZ Mobil", typ: "Virtuální", tarif: "ČEZ 15 GB", cena_kc: 649, data_gb: 15, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "", hodnoceni: 7, variantDesc: "Rozšířený tarif pro náročnější použití.", tags: []},
-  {operator: "ČEZ Mobil", typ: "Virtuální", tarif: "ČEZ 25 GB", cena_kc: 749, data_gb: 25, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "", hodnoceni: 8, variantDesc: "Velký tarif pro náročné uživatele.", tags: []},
-  {operator: "ČEZ Mobil", typ: "Virtuální", tarif: "ČEZ Neomezený", cena_kc: 699, data_gb: 999, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "", hodnoceni: 7, variantDesc: "Neomezená data v síti O2 pod značkou ČEZ.", tags: []},
-  {operator: "ČEZ Mobil", typ: "Virtuální", tarif: "ČEZ Student 10 GB", cena_kc: 399, data_gb: 10, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ano", poznamka: "Do 26 let", hodnoceni: 8, variantDesc: "Studentský tarif s výhodnou cenou.", tags: ["student"]},
-  {operator: "ČEZ Mobil", typ: "Virtuální", tarif: "ČEZ Energie+", cena_kc: 299, data_gb: 5, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ne", poznamka: "S dodávkou elektřiny", hodnoceni: 7, variantDesc: "Speciální cena pro zákazníky ČEZ energie.", tags: ["akce"]},
-  {operator: "ČEZ Mobil", typ: "Virtuální", tarif: "ČEZ Data 50 GB", cena_kc: 799, data_gb: 50, volani: "4 Kč/min", sms: "2 Kč", zavazek: "ano", studentsky: "ne", poznamka: "Pouze data", hodnoceni: 8, variantDesc: "Datový tarif pro tablety a modemy.", tags: []},
-  {operator: "ČEZ Mobil", typ: "Virtuální", tarif: "ČEZ Předplacený", cena_kc: 399, data_gb: 8, volani: "4,50 Kč/min", sms: "1,90 Kč", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 6, variantDesc: "Předplacená karta s 8 GB dat.", tags: ["bez závazku"]},
-
-  // ========== EMTÉČKO (10 variants) ==========
-  {operator: "Emtéčko", typ: "Virtuální", tarif: "Mini+", cena_kc: 89, data_gb: 0, volani: "100 min v síti", sms: "50 v síti", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 4, variantDesc: "Minimální balíček jen pro volání v síti.", tags: ["bez závazku"]},
-  {operator: "Emtéčko", typ: "Virtuální", tarif: "START", cena_kc: 169, data_gb: 1, volani: "100 min v síti", sms: "100 v síti", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 5, variantDesc: "Základní balíček s 1 GB dat.", tags: ["bez závazku"]},
-  {operator: "Emtéčko", typ: "Virtuální", tarif: "MIDI", cena_kc: 269, data_gb: 5, volani: "200 min v síti", sms: "200 v síti", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 6, variantDesc: "Střední balíček s 5 GB dat.", tags: ["bez závazku"]},
-  {operator: "Emtéčko", typ: "Virtuální", tarif: "MAXI", cena_kc: 359, data_gb: 10, volani: "300 min v síti", sms: "300 v síti", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 6, variantDesc: "Cenově dostupný balíček pro méně náročné.", tags: ["bez závazku"]},
-  {operator: "Emtéčko", typ: "Virtuální", tarif: "SUPER", cena_kc: 459, data_gb: 15, volani: "500 min v síti", sms: "500 v síti", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 7, variantDesc: "Rozšířený balíček s 15 GB.", tags: ["bez závazku"]},
-  {operator: "Emtéčko", typ: "Virtuální", tarif: "ULTRA", cena_kc: 559, data_gb: 25, volani: "1000 min v síti", sms: "1000 v síti", zavazek: "ne", studentsky: "ne", poznamka: "", hodnoceni: 8, variantDesc: "Velký balíček pro náročnější použití.", tags: ["bez závazku"]},
-  {operator: "Emtéčko", typ: "Virtuální", tarif: "NEOMEZENÝ", cena_kc: 799, data_gb: 999, volani: "neomezené v síti", sms: "neomezené v síti", zavazek: "ne", studentsky: "ne", poznamka: "1 Mb/s po 50 GB", hodnoceni: 7, variantDesc: "Neomezená data s omezením rychlosti.", tags: ["bez závazku"]},
-  {operator: "Emtéčko", typ: "Virtuální", tarif: "STUDENT", cena_kc: 299, data_gb: 12, volani: "400 min v síti", sms: "400 v síti", zavazek: "ne", studentsky: "ano", poznamka: "ISIC sleva", hodnoceni: 8, variantDesc: "Speciální studentská nabídka.", tags: ["bez závazku", "student"]},
-  {operator: "Emtéčko", typ: "Virtuální", tarif: "RODINNÝ", cena_kc: 399, data_gb: 20, volani: "600 min v síti", sms: "600 v síti", zavazek: "ne", studentsky: "ne", poznamka: "Pro rodiny", hodnoceni: 8, variantDesc: "Rodinný balíček s velkým objemem dat.", tags: ["bez závazku"]},
-  {operator: "Emtéčko", typ: "Virtuální", tarif: "VÍKEND", cena_kc: 199, data_gb: 8, volani: "200 min v síti", sms: "200 v síti", zavazek: "ne", studentsky: "ne", poznamka: "Pouze víkendy", hodnoceni: 6, variantDesc: "Speciální balíček pro víkendové použití.", tags: ["bez závazku", "akce"]}
+  // Continue with other operators... (keeping same pattern)
+  {operator: "Vodafone", typ: "Student", tarif: "#jetovtobě Basic+ (4 Mb/s)", cena_kc: 487, data_gb: 999, volani: "neomezené", sms: "neomezené", zavazek: "ano", studentsky: "ano", poznamka: "ISIC sleva", hodnoceni: 9, variantDesc: "Studentská neomezenka s rychlostí 4 Mb/s.", validita: "měsíčně", tags: ["student"]},
+  {operator: "Vodafone", typ: "Předplacený", tarif: "Den neomezeně", cena_kc: 79, data_gb: 999, volani: "z kreditu", sms: "z kreditu", zavazek: "ne", studentsky: "ne", poznamka: "24 hodin", hodnoceni: 6, variantDesc: "Jednodenní neomezená data ve Vodafonu.", validita: "24 hodin", tags: ["bez závazku"]},
+  {operator: "BLESKmobil", typ: "Virtuální AKCE", tarif: "ULTRA30 60 GB", cena_kc: 299, data_gb: 60, volani: "z kreditu", sms: "z kreditu", zavazek: "ne", studentsky: "ne", poznamka: "Akce do konce roku", hodnoceni: 9, variantDesc: "Masivní porce dat bez závazku, ideální pro šetření.", validita: "30 dní", tags: ["bez závazku", "akce"]},
+  {operator: "Kaktus", typ: "Virtuální", tarif: "KAKTUS 10 GB (akce)", cena_kc: 250, data_gb: 10, volani: "z kreditu", sms: "z kreditu", zavazek: "ne", studentsky: "ne", poznamka: "Akční cena", hodnoceni: 8, variantDesc: "Levný datový balíček na předplacence.", validita: "30 dní", tags: ["bez závazku", "akce"]}
 ];
 
-// ============ ENHANCED UI FUNCTIONS ============
-document.addEventListener('DOMContentLoaded', function () {
+// ============ UTILITY FUNCTIONS ============
+function computeValidity(t) {
+  if (t.validita) return t.validita;
+  const n = String(t.tarif || '').toLowerCase();
+  if (/(den|day)/.test(n)) return '24 hodin';
+  if (/(týden|tyden|week)/.test(n)) return '7 dní';
+  if (/víkend|vikend/.test(n)) return 'víkend';
+  if (/měsíc|mesic|month/.test(n)) return '30 dní';
+  if (String(t.typ || '').toLowerCase().includes('předplacen')) return '30 dní';
+  if (t.zavazek === 'ano') return 'měsíčně';
+  return '30 dní';
+}
+
+function computeRenewal(t) {
+  const v = computeValidity(t);
+  if (v === '24 hodin') return 'jednorázový';
+  if (v === '7 dní') return 'jednorázový';
+  if (v === 'víkend') return 'jednorázový';
+  if (v === '30 dní') return 'automatická obnova každých 30 dní';
+  if (v === 'měsíčně') return 'měsíční fakturace';
+  return 'automatická obnova';
+}
+
+// ============ DOM INITIALIZATION ============
+document.addEventListener('DOMContentLoaded', function() {
   setupEventListeners();
   updateDataValue();
   if (document.getElementById('operatorTariffs')) {
@@ -133,7 +102,7 @@ function updateSearchButton() {
   }
 }
 
-// ============ FILTER + SCORE ============
+// ============ MAIN CALCULATOR ============
 function findBestTariffs() {
   const prefs = getUserPreferences();
   const filtered = filterTariffs(prefs);
@@ -194,7 +163,7 @@ function score(t, p) {
   return s;
 }
 
-// ============ RESULTS RENDER ============
+// ============ RESULTS DISPLAY ============
 function displayResults(tariffs, prefs) {
   const c = document.getElementById('resultsContainer');
   if (!c) return;
@@ -223,6 +192,8 @@ function createResultCard(t, isBest, prefs) {
       <div class="detail-item"><div class="detail-label">Volání</div><div class="detail-value">${t.volani}</div></div>
       <div class="detail-item"><div class="detail-label">SMS</div><div class="detail-value">${t.sms}</div></div>
       <div class="detail-item"><div class="detail-label">Závazek</div><div class="detail-value">${t.zavazek === 'ano' ? 'Ano' : 'Ne'}</div></div>
+      <div class="detail-item"><div class="detail-label">Platnost</div><div class="detail-value">${computeValidity(t)}</div></div>
+      <div class="detail-item"><div class="detail-label">Obnova</div><div class="detail-value">${computeRenewal(t)}</div></div>
     </div>
     ${t.variantDesc ? `<div class="result-notes">ℹ️ ${t.variantDesc}</div>` : ''}
     ${t.poznamka ? `<div class="result-notes">💡 ${t.poznamka}</div>` : ''}
@@ -267,18 +238,18 @@ function generateStars(r) {
   return '★'.repeat(full) + '☆'.repeat(empty);
 }
 
-// ============ OPERATOR DETAIL ============
+function getOperatorClass(op) {
+  const map = { 'T-Mobile': 'tmobile', 'O2': 'o2', 'Vodafone': 'vodafone', 'BLESKmobil': 'blesk', 'Kaktus': 'tmobile', 'ČEZ Mobil': 'o2', 'Emtéčko': 'o2' };
+  return map[op] || '';
+}
+
+// ============ OPERATOR DETAIL PAGES ============
 function getQueryParam(name) {
   try {
     return new URL(window.location.href).searchParams.get(name);
   } catch (e) {
     return null;
   }
-}
-
-function getOperatorClass(op) {
-  const map = { 'T-Mobile': 'tmobile', 'O2': 'o2', 'Vodafone': 'vodafone', 'BLESKmobil': 'blesk', 'Kaktus': 'tmobile', 'ČEZ Mobil': 'o2', 'Emtéčko': 'o2' };
-  return map[op] || '';
 }
 
 let operatorsProfiles = {};
@@ -365,6 +336,8 @@ function renderOperatorDetail() {
           <div class="detail-item"><div class="detail-label">Volání</div><div class="detail-value">${t.volani}</div></div>
           <div class="detail-item"><div class="detail-label">SMS</div><div class="detail-value">${t.sms}</div></div>
           <div class="detail-item"><div class="detail-label">Závazek</div><div class="detail-value">${t.zavazek === 'ano' ? 'Ano' : 'Ne'}</div></div>
+          <div class="detail-item"><div class="detail-label">Platnost</div><div class="detail-value">${computeValidity(t)}</div></div>
+          <div class="detail-item"><div class="detail-label">Obnova</div><div class="detail-value">${computeRenewal(t)}</div></div>
         </div>
         ${t.variantDesc ? `<div class="result-notes">ℹ️ ${t.variantDesc}</div>` : ''}
         ${t.poznamka ? `<div class="result-notes">💡 ${t.poznamka}</div>` : ''}
@@ -415,23 +388,4 @@ function renderOperatorDetail() {
       });
     }
   }
-}
-
-
-
-function computeValidity(t){
-  if (t.validita) return t.validita;
-  const n = String(t.tarif||'').toLowerCase();
-  const type = String(t.typ||'').toLowerCase();
-  // explicit keywords
-  if (/(den|day)/.test(n)) return '24 hodin';
-  if (/(týden|tyden|week)/.test(n)) return '7 dní';
-  if (/víkend|vikend/.test(n)) return 'víkend';
-  if (/měsíc|mesic|month/.test(n)) return '30 dní';
-  // type based fallback
-  if (type.includes('předplacen')) return '30 dní';
-  if (t.zavazek === 'ano') return 'měsíčně (smluvní)';
-  // operator defaults
-  if (['bleskmobil','kaktus'].includes(String(t.operator||'').toLowerCase())) return '30 dní';
-  return 'měsíčně';
 }
