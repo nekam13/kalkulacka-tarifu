@@ -380,6 +380,23 @@ function setupSearch(allTariffs, links) {
   }
 }
 
+
+
+// Combine search text, tag filter and validity filter
+function applyFilters(allTariffs, links){
+  const search = document.getElementById('tariffSearch');
+  const q = (search?.value || '').toLowerCase();
+  const activeTagBtn = document.querySelector('.tag-filter.active');
+  const tag = activeTagBtn ? activeTagBtn.getAttribute('data-filter') : 'all';
+  const validitySel = document.getElementById('validityFilter');
+  const validity = validitySel ? validitySel.value : 'all';
+
+  let res = allTariffs.filter(t => (`${t.tarif} ${t.cena_kc} ${(t.tags||[]).join(' ')}`.toLowerCase().includes(q)));
+  if (tag && tag !== 'all') res = res.filter(t => (t.tags||[]).includes(tag));
+  if (validity && validity !== 'all') res = res.filter(t => computeValidity(t) === validity);
+
+  renderTariffList(res, links);
+}
 function setupTagFilters(allTariffs, links) {
   const uniqueTags = [...new Set(allTariffs.flatMap(t => t.tags || []))];
   if (uniqueTags.length === 0) return;
@@ -407,8 +424,7 @@ function setupTagFilters(allTariffs, links) {
       e.target.classList.add('active');
 
       const filter = e.target.dataset.filter;
-      const filtered = filter === 'all' ? allTariffs : allTariffs.filter(t => t.tags && t.tags.includes(filter));
-      renderTariffList(filtered, links);
+      applyFilters(allTariffs, links);
     }
   });
 }
