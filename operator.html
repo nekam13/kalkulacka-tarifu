@@ -24,7 +24,16 @@
       <div class="result-header" style="margin-bottom:0.5rem;">
         <h2 style="margin:0;">Tarify tohoto operátora</h2>
         <div style="margin-left:auto;">
-          <input id="tariffSearch" type="text" placeholder="Hledat tarif..." style="padding:0.5rem 0.75rem;border:1px solid #e2e8f0;border-radius:8px;" />
+          <input id="tariffSearch" type="text" placeholder="Hledat tarif..." />
+          <select id="validityFilter" style="margin-left:0.5rem;padding:0.5rem;border:1px solid #e2e8f0;border-radius:8px;">
+            <option value="all">Platnost: všechny</option>
+            <option value="24 hodin">24 hodin</option>
+            <option value="7 dní">7 dní</option>
+            <option value="30 dní">30 dní</option>
+            <option value="měsíčně">měsíčně</option>
+            <option value="víkend">víkend</option>
+          </select
+           style="padding:0.5rem 0.75rem;border:1px solid #e2e8f0;border-radius:8px;" />
         </div>
       </div>
       <div id="operatorTariffs" class="results-container"></div>
