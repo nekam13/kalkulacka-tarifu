@@ -45,6 +45,52 @@ async function loadAllData() {
   }
 }
 
+// ============ URL PARAMETER HANDLING ============
+function getURLParams() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    q: params.get('q') || '',
+    tag: params.get('tag') || 'all',
+    validity: params.get('validity') || 'all',
+    noContract: params.get('noc') === '1',
+    student: params.get('stu') === '1'
+  };
+}
+
+function setURLParams(params) {
+  const url = new URL(window.location);
+  url.search = '';
+
+  if (params.q) url.searchParams.set('q', params.q);
+  if (params.tag && params.tag !== 'all') url.searchParams.set('tag', params.tag);
+  if (params.validity && params.validity !== 'all') url.searchParams.set('validity', params.validity);
+  if (params.noContract) url.searchParams.set('noc', '1');
+  if (params.student) url.searchParams.set('stu', '1');
+
+  window.history.replaceState({}, '', url);
+}
+
+function restoreFiltersFromURL() {
+  const params = getURLParams();
+
+  const search = document.getElementById('tariffSearch');
+  if (search) search.value = params.q;
+
+  const validitySelect = document.getElementById('validityFilter');
+  if (validitySelect) validitySelect.value = params.validity;
+
+  const noContractCheck = document.getElementById('noContractFilter');
+  if (noContractCheck) noContractCheck.checked = params.noContract;
+
+  const studentCheck = document.getElementById('studentFilter');
+  if (studentCheck) studentCheck.checked = params.student;
+
+  // Activate correct tag filter
+  document.querySelectorAll('.tag-filter').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-filter') === params.tag);
+  });
+}
+
 // ============ UTILITY FUNCTIONS ============
 function computeValidity(t) {
   if (t.validita) return t.validita;
@@ -326,6 +372,12 @@ function renderOperatorDetail() {
   }
 
   renderTariffList(all, links);
+
+  // Restore filters from URL and apply them
+  setTimeout(() => {
+    restoreFiltersFromURL();
+    applyFilters(all, links);
+  }, 100);
   setupSearch(all, links);
   setupTagFilters(all, links);
 }
@@ -360,7 +412,7 @@ function renderTariffList(items, links) {
       ${t.variantDesc ? `<div class="result-notes">ℹ️ ${t.variantDesc}</div>` : ''}
       ${t.poznamka ? `<div class="result-notes">💡 ${t.poznamka}</div>` : ''}
       <div class="cta-buttons">
-        ${links.cenik ? `<a href="${links.cenik}" target="_blank" rel="noopener">📋 Objednat</a>` : ''}
+        ${t.url ? `<a href="${t.url}" target="_blank" rel="noopener">📋 Objednat</a>` : (links.cenik ? `<a href="${links.cenik}" target="_blank" rel="noopener">📋 Objednat</a>` : '')}
       </div>
     `;
     list.appendChild(card);
@@ -382,7 +434,7 @@ function setupSearch(allTariffs, links) {
 
 
 
-// Combine search text, tag filter and validity filter
+// Enhanced filtering with URL params
 function applyFilters(allTariffs, links){
   const search = document.getElementById('tariffSearch');
   const q = (search?.value || '').toLowerCase();
@@ -390,10 +442,40 @@ function applyFilters(allTariffs, links){
   const tag = activeTagBtn ? activeTagBtn.getAttribute('data-filter') : 'all';
   const validitySel = document.getElementById('validityFilter');
   const validity = validitySel ? validitySel.value : 'all';
+  const noContractCheck = document.getElementById('noContractFilter');
+  const noContract = noContractCheck ? noContractCheck.checked : false;
+  const studentCheck = document.getElementById('studentFilter');
+  const student = studentCheck ? studentCheck.checked : false;
 
-  let res = allTariffs.filter(t => (`${t.tarif} ${t.cena_kc} ${(t.tags||[]).join(' ')}`.toLowerCase().includes(q)));
-  if (tag && tag !== 'all') res = res.filter(t => (t.tags||[]).includes(tag));
-  if (validity && validity !== 'all') res = res.filter(t => computeValidity(t) === validity);
+  let res = allTariffs;
+
+  // Text search
+  if (q) {
+    res = res.filter(t => (`${t.tarif} ${t.cena_kc} ${(t.tags||[]).join(' ')} ${t.variantDesc||''}`.toLowerCase().includes(q)));
+  }
+
+  // Tag filter
+  if (tag && tag !== 'all') {
+    res = res.filter(t => (t.tags||[]).includes(tag));
+  }
+
+  // Validity filter
+  if (validity && validity !== 'all') {
+    res = res.filter(t => computeValidity(t) === validity);
+  }
+
+  // Contract filter
+  if (noContract) {
+    res = res.filter(t => t.zavazek === 'ne');
+  }
+
+  // Student filter
+  if (student) {
+    res = res.filter(t => t.studentsky === 'ano' || (t.tags||[]).includes('student'));
+  }
+
+  // Update URL
+  setURLParams({ q, tag, validity, noContract, student });
 
   renderTariffList(res, links);
 }
